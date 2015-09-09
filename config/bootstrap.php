@@ -11,9 +11,7 @@ use Cake\Core\Configure\Engine\PhpConfig;
 use Recaptcha\Validation\ConfigValidator;
 
 // Pass the config data from config/recaptcha.php to Configure Class
-// If the file does not exist, an exception is thrown
-Configure::config('default', new PhpConfig(dirname(APP) . DS . 'config' . DS));
-Configure::load('recaptcha', 'default', false);
+Configure::load('recaptcha');
 
 // Validate the Configure Data
 $validator = new ConfigValidator();
@@ -21,6 +19,9 @@ $validator = new ConfigValidator();
 $errors = $validator->errors(Configure::read('Recaptcha'));
 
 if (!empty($errors)) {
-    throw new \Exception(__d('recaptcha', 'One of your recaptcha config value is incorrect'));
-    // throw an exception with config error that is raised
+    $message = '';
+    foreach ($errors as $errorName => $errorArray) {
+        $message .= '<br>- ' . $errorName . '<br>' . implode('<br>', $errorArray);
+    }
+    throw new \Exception(__d('recaptcha', 'At least One of your recaptcha config value is incorrect: {0}', $message));
 }

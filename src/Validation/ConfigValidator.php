@@ -89,19 +89,27 @@ class ConfigValidator extends Validator
         parent::__construct();
         $this
             // ->requirePresence('secret')
-            //->notEmpty('secret', __d('recaptcha', 'A secret should not be blank.'))
+            // ->notEmpty('secret', __d('recaptcha', 'A secret should not be blank.'))
+            ->requirePresence('sitekey')
+            ->notEmpty('sitekey', __d('recaptcha', 'A sitekey should not be blank.'))
+            ->requirePresence('lang')
+            ->notEmpty('lang', __d('recaptcha', 'A lang should not be blank.'))
             ->add('lang', [
                 'inList' => [
                     'rule' => ['inList', $this->validList['lang']],
                     'message' => __d('recaptcha', 'The lang should be in the following authorized lang ' . implode(',', $this->validList['lang'])),
                 ]
             ])
+            ->requirePresence('theme')
+            ->notEmpty('theme', __d('recaptcha', 'A theme should not be blank.'))
             ->add('theme', [
                 'inList' => [
                     'rule' => ['inList', $this->validList['theme']],
                     'message' => __d('recaptcha', 'The theme should be in the following authorized theme ' . implode(',', $this->validList['theme'])),
                 ]
             ])
+            ->requirePresence('type')
+            ->notEmpty('type', __d('recaptcha', 'A type should not be blank.'))
             ->add('type', [
                 'inList' => [
                     'rule' => ['inList', $this->validList['type']],
