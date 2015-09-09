@@ -166,7 +166,7 @@ See another example of contact with no form in
 
 ## Tests ##
 
-To test the plugin, clone it and run `composer install`. Then run
+To test the plugin, clone it in plugins, run `composer install`. Then run
 `./vendor/bin/phpunit` and `./vendor/bin/phpcs -n -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests --ignore=vendor`
 
 ## Support & Contribution ##
