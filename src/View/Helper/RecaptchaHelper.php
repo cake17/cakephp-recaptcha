@@ -47,15 +47,10 @@ class RecaptchaHelper extends Helper
     /**
      * Constructor
      *
-     * @param View $view View
-     * @param array $config Config
-     *
      * @return void
      */
-    public function __construct(View $view, $config = [])
+    public function validateConfigFile()
     {
-        parent::__construct($view, $config);
-
         // Merge Options given by user in config/recaptcha
         $configRecaptcha = Configure::read('Recaptcha');
 
@@ -90,6 +85,9 @@ class RecaptchaHelper extends Helper
      */
     public function display(array $options = [])
     {
+        // check values in config file
+        $this->validateConfigFile();
+
         // merge options
         $options = array_merge($this->config(), $options);
 
